@@ -1,6 +1,7 @@
 const weather = require ("weather-js");
+const writeFile = require('./wrtite-file')
 
-function getWeather(weatherData){
+function getWeather(weatherData, username){
 
     weather.find(weatherData, function(err, result){
 
@@ -9,10 +10,11 @@ function getWeather(weatherData){
             return;
         } 
         var weatherData = JSON.stringify(result, null, 2);
-        console.log('weather ran')
-        var logData = JSON.parse(weatherData)
-        console.log(`The weather in ${logData[0].location.name} is ${logData[0].current.temperature} degrees and ${logData[0].current.skytext}` )
 
+        var logData = JSON.parse(weatherData)
+        console.log(`\n----------------------------\nThe weather in ${logData[0].location.name} is ${logData[0].current.temperature} degrees and ${logData[0].current.skytext}` )
+        var logString = `Name: ${username} Location: ${logData[0].location.name} Date: ${logData[0].current.date} || ` 
+        writeFile.writeUser(logString)
     });
     
 }

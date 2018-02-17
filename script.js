@@ -2,6 +2,13 @@ const inquirer = require('inquirer')
 const writeToFile = require('./wrtite-file')
 const user = require('./user')
 const app = require('./app')
+const fs = require('fs')
+// const refMoment = require('moment')
+
+
+// var currentDate = refMoment.moment("DD MM YYYY")
+
+// console.log(currentDate)
 
 function getWeather(){
     //initial set of questions to determine whether or not user is admin
@@ -31,18 +38,20 @@ function getWeather(){
             ]).then(function(answer){
                 console.log(`Hi ${answer.name}, its always sunny in ${answer.location}`)
                 //this line is just logging the data directly from the user input
-                var userText = `Name: ${answer.name} Location: ${answer.location} || `
+                //var userText = `Name: ${answer.name} Location: ${answer.location} || `
                 //creating a string of the user input and holding it in a variable to be passed into the 
                 //function that will write (append) it to the log file
-                writeToFile(userText)
+                // writeToFile(userText)
                 var weatherData = {
                     search: answer.location,
                     degreeType: 'F'
                 }
-                app.getWeather(weatherData)
+                app.getWeather(weatherData, answer.name)
                 // function call to add user to the user array in admin
                 // replaced with fs functionality
                 // user.adminObj.addUser(answer.name,answer.location)
+                var writeText = app.getWeather(weatherData, answer.name)
+                // writeToFile(writeText)
                 runAgain()
             }).catch(function(err){
                 console.log(err)
@@ -50,6 +59,7 @@ function getWeather(){
         } else {
             user.adminObj.printUsers()
             runAgain()
+
         }
     }).catch(function(err){
         console.log

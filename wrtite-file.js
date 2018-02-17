@@ -2,6 +2,7 @@ const fs = require('fs')
 
 
 function writeUser(user){
+    console.log('write user ran')
     fs.appendFile('log.txt',user, (err) => {
         if(err){
             console.log(err)

@@ -1,5 +1,4 @@
 var adminObj = {
-    users: ['balls','balls'],
     addUser: (name, location) => this.users.push(new User(name,location)),
     printUsers: () => {
         for(var i = 0; i<this.users.length; i++){
