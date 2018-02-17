@@ -31,9 +31,9 @@ function getWeather(){
             ]).then(function(answer){
                 console.log(`Hi ${answer.name}, its always sunny in ${answer.location}`)
                 //this line is just logging the data directly from the user input
-                var userText = `Name: ${answer.name} Location: ${answer.location}`
+                var userText = `Name: ${answer.name} Location: ${answer.location} || `
                 //creating a string of the user input and holding it in a variable to be passed into the 
-                //function that will write it to the log file
+                //function that will write (append) it to the log file
                 writeToFile(userText)
                 var weatherData = {
                     search: answer.location,
